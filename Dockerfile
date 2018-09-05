@@ -1,19 +1,17 @@
-FROM mysql:5.6
+FROM mysql:5.7
 
-## 
-LABEL "io.github.islandora-collaboration-group.name"="isle-mysql" 
-LABEL "io.github.islandora-collaboration-group.description"="ISLE-specific MySQL server with sample site isle.localdomain preloaded!"
-LABEL "io.github.islandora-collaboration-group.license"="Apache-2.0" 
-LABEL "io.github.islandora-collaboration-group.vcs-url"="git@github.com:Islandora-Collaboration-Group/ISLE.git" 
-LABEL "io.github.islandora-collaboration-group.vendor"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com"
-LABEL "io.github.islandora-collaboration-group.maintainer"="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" 
-##
+LABEL org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.name="ISLE MySQL Image" \
+      org.label-schema.description="ISLE MySQL server." \
+      org.label-schema.url="https://islandora-collaboration-group.github.io" \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.vcs-url="https://github.com/Islandora-Collaboration-Group/isle-mysql" \
+      org.label-schema.vendor="Islandora Collaboration Group (ICG) - islandora-consortium-group@googlegroups.com" \
+      org.label-schema.version=$VERSION \
+      org.label-schema.schema-version="1.0"
 
-COPY my.cnf /etc/alternatives/
-COPY init_dbs/ /docker-entrypoint-initdb.d/
+RUN chown mysql /var/log/mysql -R
 
-#NB: The VOLUME /var/lib/mysql comes from the base image (https://hub.docker.com/_/mysql/)
+VOLUME /var/lib/mysql
 
-EXPOSE 3306
-
-CMD ["mysqld"]
+COPY rootfs /
