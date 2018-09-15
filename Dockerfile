@@ -1,5 +1,8 @@
 FROM mysql:5.7
 
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="ISLE MySQL Image" \
       org.label-schema.description="ISLE MySQL server." \
