@@ -1,0 +1,20 @@
+[mysqld]
+# * Fine Tuning
+key_buffer_size			= 16M
+sort_buffer_size		= 4M
+read_buffer_size		= 1M
+table_open_cache		= 3000
+max_allowed_packet		= 128M
+myisam_recover_options	= BACKUP
+
+
+# ** Query Cache Configuration
+query_cache_limit		= 1M
+query_cache_size		= 16M
+
+# ** InnoDB
+innodb_thread_concurrency		= 10
+innodb_buffer_pool_size			= 128M
+
+[isamchk]
+key_buffer		= 16M
