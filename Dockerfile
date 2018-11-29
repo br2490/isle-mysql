@@ -13,7 +13,8 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.version=$VERSION \
       org.label-schema.schema-version="1.0"
 
-RUN chown mysql /var/log/mysql -R
+RUN chown mysql /var/log/mysql -R && \
+    ln -s /utility_scripts/importDatabase.sh /bin/importDatabase
 
 VOLUME /var/lib/mysql
 
